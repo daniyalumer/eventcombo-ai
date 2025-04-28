@@ -1,0 +1,72 @@
+.prompt-input-container {
+    padding: 20px;
+  }
+  
+  h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  p {
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  textarea {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .submit-button {
+    background-color: #4c84ff;
+    min-width: 140px;
+  }
+  
+  .clear-button {
+    background-color: #6c757d;
+  }
+  
+  .examples-container {
+    margin-top: 30px;
+  }
+  
+  .examples-container h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .examples-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .example-item {
+    padding: 10px 15px;
+    background-color: #f0f7ff;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: left;
+    width: 100%;
+    border: none;
+    font-family: inherit;
+  }
+  
+  .example-item:hover, .example-item:focus {
+    background-color: #e0efff;
+    outline: none;
+  }

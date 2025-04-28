@@ -1,0 +1,25 @@
+{
+    "sample_data": [
+      {
+        "event_id": "ev_001",
+        "views": 1250,
+        "registrations": 78,
+        "conversion_rate": 6.24,
+        "popular_sections": ["speakers", "agenda", "registration"]
+      },
+      {
+        "event_id": "ev_002",
+        "views": 2100,
+        "registrations": 145,
+        "conversion_rate": 6.9,
+        "popular_sections": ["pricing", "speakers", "description"]
+      },
+      {
+        "event_id": "ev_003",
+        "views": 980,
+        "registrations": 52,
+        "conversion_rate": 5.3,
+        "popular_sections": ["registration", "location", "agenda"]
+      }
+    ]
+  }

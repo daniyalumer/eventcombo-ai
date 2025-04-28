@@ -1,0 +1,45 @@
+<div class="prompt-input-container">
+  <h2>Event Prompt</h2>
+  <p>Describe the event you want to create using natural language:</p>
+  
+  <div class="form-group">
+    <textarea
+      [(ngModel)]="userPrompt"
+      placeholder="E.g., Create a virtual conference for tech startups with 3 speakers and a registration form..."
+      rows="5"
+    ></textarea>
+  </div>
+  
+  <div class="button-container">
+    <button 
+      (click)="submitPrompt()" 
+      [disabled]="!userPrompt || isProcessing" 
+      class="submit-button"
+    >
+      {{ isProcessing ? 'Processing...' : 'Generate Event' }}
+    </button>
+    <button 
+      (click)="clearPrompt()" 
+      [disabled]="!userPrompt || isProcessing" 
+      class="clear-button"
+    >
+      Clear
+    </button>
+  </div>
+  
+  <div class="examples-container">
+    <h3>Examples</h3>
+    <div class="examples-list">
+      <button 
+        *ngFor="let example of examples" 
+        class="example-item"
+        (click)="useExample(example)"
+        (keydown.enter)="useExample(example)"
+        tabindex="0"
+        role="button"
+      >
+        "{{ example }}"
+      </button>
+    </div>
+  </div>
+</div>

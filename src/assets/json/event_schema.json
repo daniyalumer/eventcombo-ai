@@ -1,0 +1,35 @@
+{
+    "required": ["name", "title", "description", "startDate", "endDate"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Event name"
+      },
+      "title": {
+        "type": "string",
+        "description": "Event title"
+      },
+      "description": {
+        "type": "string",
+        "description": "Event description"
+      },
+      "startDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Event start date and time"
+      },
+      "endDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Event end date and time"
+      },
+      "location": {
+        "type": "string",
+        "description": "Event location"
+      },
+      "organizer": {
+        "type": "string",
+        "description": "Event organizer"
+      }
+    }
+  }

@@ -1,0 +1,55 @@
+<div class="event-section" [ngClass]="type">
+  <h3>{{ title }}</h3>
+  
+  <!-- Basic text content -->
+  <div *ngIf="!isSpeakersSection() && !isAgendaSection() && !isRegistrationSection()" class="generic-content">
+    <p *ngIf="hasText(content)">{{ content.text }}</p>
+    <p *ngIf="!hasText(content)">No content available</p>
+  </div>
+  
+  <!-- Speakers section -->
+  <div *ngIf="isSpeakersSection() && hasSpeakers(content)" class="speakers-content">
+    <div *ngFor="let speaker of content.speakers" class="speaker-card">
+      <div class="speaker-avatar">
+        <div class="avatar-placeholder">
+          {{ speaker.name.charAt(0) }}
+        </div>
+      </div>
+      <div class="speaker-info">
+        <h4>{{ speaker.name }}</h4>
+        <p *ngIf="speaker.role" class="speaker-role">{{ speaker.role }}</p>
+        <p *ngIf="speaker.bio" class="speaker-bio">{{ speaker.bio }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Agenda section -->
+  <div *ngIf="isAgendaSection() && hasAgendaItems(content)" class="agenda-content">
+    <div *ngFor="let item of content.items" class="agenda-item">
+      <div class="agenda-time">{{ item.time }}</div>
+      <div class="agenda-details">
+        <h4>{{ item.title }}</h4>
+        <p *ngIf="item.description">{{ item.description }}</p>
+        <p *ngIf="item.speaker" class="agenda-speaker">
+          Speaker: {{ item.speaker }}
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Registration section -->
+  <div *ngIf="isRegistrationSection()" class="registration-content">
+    <p>{{ hasText(content) ? content.text : 'Register for this event to secure your spot.' }}</p>
+    <div class="registration-form">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Your email">
+      </div>
+      <button class="register-button">Register Now</button>
+    </div>
+  </div>
+</div>

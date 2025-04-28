@@ -1,0 +1,25 @@
+<div class="dialog-overlay" *ngIf="show">
+  <div class="dialog-container">
+    <div class="dialog-header">
+      <h2>We Need More Information</h2>
+      <p>Please provide the following details to create your event:</p>
+    </div>
+    
+    <div class="dialog-content">
+      <div *ngFor="let q of questions" class="form-group">
+        <label [for]="q.field">{{ q.question }}</label>
+        <input 
+          type="text" 
+          [id]="q.field" 
+          [(ngModel)]="answers[q.field]" 
+          placeholder="Your answer"
+        >
+      </div>
+    </div>
+    
+    <div class="dialog-footer">
+      <button class="cancel-button" (click)="onCancel()">Cancel</button>
+      <button class="submit-button" (click)="onSubmit()">Submit</button>
+    </div>
+  </div>
+</div>

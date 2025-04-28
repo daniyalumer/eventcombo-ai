@@ -1,0 +1,22 @@
+<div class="app-container">
+  <header>
+    <h1>{{ title }}</h1>
+    <p>Create events using natural language prompts</p>
+  </header>
+  
+  <main>
+    <div class="prompt-container">
+      <app-prompt-input></app-prompt-input>
+    </div>
+    
+    <div class="preview-container">
+      <app-event-preview></app-event-preview>
+    </div>
+  </main>
+  
+  <footer>
+    <p>EventCombo AI - Intelligent Event Creation</p>
+  </footer>
+</div>
+
+<router-outlet></router-outlet>
