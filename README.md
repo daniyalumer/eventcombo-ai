@@ -1,6 +1,33 @@
-# EventcomboAi
+# EventCombo AI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+EventCombo AI is an intelligent event generation tool that creates event content from natural language prompts. Built with Angular, this application demonstrates how to implement a conversational UI for generating structured event data.
+
+## Features
+
+- **Natural Language Prompt Processing**: Describe your event in plain language
+- **Intelligent Event Generation**: Automatically creates structured event content
+- **Content Constraints**: Enforces platform constraints like banned words and allowed sections
+- **Interactive Clarification**: Requests additional information when needed
+- **Dynamic Event Preview**: Real-time preview of the generated event
+
+## Project Structure
+
+The application follows a feature-based organization:
+
+```
+src/
+├── app/
+│   ├── core/
+│   │   ├── models/       # Data models and interfaces
+│   │   └── services/     # Core services for constraints and event generation
+│   ├── features/
+│   │   ├── prompt-input/         # User prompt input component
+│   │   ├── event-preview/        # Event preview component
+│   │   ├── event-section/        # Event section component for different section types
+│   │   └── clarification-dialog/ # Dialog for requesting additional information
+│   └── assets/
+│       └── json/         # Constraint configuration files
+```
 
 ## Development server
 
@@ -10,21 +37,23 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify source files.
 
-## Code scaffolding
+## How It Works
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. **Enter a Prompt**: Describe the event you want to create in natural language
+2. **AI Processing**: The system analyzes your prompt for required information and requested sections
+3. **Clarification (if needed)**: If essential information is missing, the system will ask for clarification
+4. **Event Generation**: Creates a structured event with appropriate sections
+5. **Preview and Edit**: View the generated event and make changes if needed
 
-```bash
-ng generate component component-name
-```
+## Constraint System
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The application includes a constraint system that enforces platform rules:
 
-```bash
-ng generate --help
-```
+- **Allowed Sections**: Only certain section types are permitted
+- **Banned Words/Content**: Content with prohibited keywords is rejected
+- **Required Fields**: Ensures all necessary event information is provided
 
 ## Building
 
@@ -34,26 +63,33 @@ To build the project run:
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This will compile your project and store the build artifacts in the dist directory.
 
 ## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Execute unit tests with Karma:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## Technical Implementation
 
-For end-to-end (e2e) testing, run:
+- **Angular 19+**: Built with the latest Angular framework
+- **Standalone Components**: Uses Angular's standalone component architecture
+- **Type Safety**: Comprehensive TypeScript interfaces and type guards
+- **Reactive Programming**: RxJS for handling asynchronous operations
 
-```bash
-ng e2e
-```
+## Future Enhancements
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- **Enhanced NLP**: More sophisticated prompt analysis
+- **User Accounts**: Save and manage generated events
+- **Export Options**: Export events to various formats
+- **Template Gallery**: Pre-made event templates
+- **Social Sharing**: Share generated events on social media
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular Documentation](https://angular.dev)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [RxJS Documentation](https://rxjs.dev/guide/overview)
