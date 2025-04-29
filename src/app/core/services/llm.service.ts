@@ -144,47 +144,54 @@ export class LlmService {
     console.log('[LlmService] Required fields:', requiredFields);
 
     const prompt = `
-You are an AI assistant specialized in creating structured event data from user descriptions.
-Your task is to convert natural language event descriptions into structured data.
+You are an AI assistant specialized in generating structured data for public events based on user input. 
+Your task is to extract valid event data and return it in a strict JSON format.
+
+IMPORTANT:
+You must NOT fabricate or hallucinate missing values for key event information such as dates, organizer, or location. Instead, when these are not present in the input, explicitly list them in the *missingInformation* field along with a natural-language question to ask the user.
 
 RESPONSE FORMAT:
-You must respond with a valid JSON object containing:
+You must return a valid JSON object like this:
 {
   "event": {
     "name": "Short event name",
     "title": "Full event title",
     "description": "Detailed event description",
-    "startDate": "ISO date string",
-    "endDate": "ISO date string",
-    "location": "Event location if specified",
-    "organizer": "Event organizer if specified",
+    "startDate": "ISO date string (e.g. 2025-07-15T09:00:00Z)",
+    "endDate": "ISO date string (e.g. 2025-07-15T17:00:00Z)",
+    "location": "Event location (physical or virtual)",
+    "organizer": "Organizer name or organization",
     "sections": [
       {
         "type": "section_type",
-        "title": "Section title",
+        "title": "Title of this section",
         "content": {
-          // Content varies by section type
+          // Varies by section type
         }
       }
     ]
   },
   "analysisSummary": {
-    "requestedSections": ["list", "of", "sections", "user", "requested"],
-    "rejectedSections": ["list", "of", "sections", "that", "were", "rejected"],
+    "requestedSections": ["list", "of", "valid", "sections", "user", "mentioned"],
+    "rejectedSections": ["sections", "rejected", "due", "to", "policy"],
     "missingInformation": [
-      {"field": "field_name", "question": "Question to ask user"}
+      {
+        "field": "field_name",
+        "question": "Ask a natural language question to obtain this field"
+      }
     ]
   }
 }
 
 CONSTRAINTS:
-- Only include sections among: ${allowedSections}
-- Reject sections related to: ${bannedKeywords}
-- Banned words: ${bannedWords}
+- Only use section types from this list: ${allowedSections}
+- Reject any section or content containing or related to these **banned keywords**: ${bannedKeywords}
+- Do not allow output to include these **banned words**: ${bannedWords}
 - Required fields: ${requiredFields}
-- If any required fields can't be determined, include them in missingInformation
+- If the user input does not mention it explicitly is about an event, assume it is an event and ask the necessary clarifying questions in *missingInformation*.
 
-The user will now describe an event they want to create. Extract all relevant information and follow the format above.
+BEGIN:
+The user will now describe a public event. Parse their input and return structured, filtered, and validated event data.
 `;
     
     console.log('[LlmService] System prompt created, length:', prompt.length);

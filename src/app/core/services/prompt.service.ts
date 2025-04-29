@@ -21,6 +21,14 @@ export class PromptService {
 
   processPrompt(prompt: string): Observable<{missingInfo: ClarificationQuestion[] | null, success: boolean}> {
     console.log('[PromptService] Processing prompt');
+
+    // Validate prompt
+    if (!prompt || prompt.trim().length < 10) {
+      console.warn('[PromptService] Prompt too short or empty');
+      this.eventService.setError('Please provide a more detailed description of your event (at least 10 characters)');
+      return of({ missingInfo: null, success: false });
+    }
+
     this.eventService.setLoading(true);
     this.eventService.setError(null);
     console.log('[PromptService] Loading state set to true, errors cleared');
@@ -112,15 +120,15 @@ export class PromptService {
       this.eventService.setError('No pending prompt to clarify');
       return of(false);
     }
-
+  
     console.log('[PromptService] Found pending analysis to apply clarifications to');
     this.eventService.setLoading(true);
     console.log('[PromptService] Loading state set to true');
-
+  
     // Create a complete event object with the clarification answers
     const event = { ...this.currentAnalysis.event };
     console.log('[PromptService] Created event object from current analysis');
-
+  
     // Apply clarification answers to the event
     console.log('[PromptService] Applying clarification answers to event');
     Object.entries(answers).forEach(([field, value]) => {
@@ -129,16 +137,59 @@ export class PromptService {
       if (field.includes('.')) {
         // Handle nested fields like section.speakers[0].name
         console.log(`[PromptService] Field "${field}" is a nested field`);
-        const [section, subfield] = field.split('.');
-        // Need more complex parsing for nested fields
-        console.log('[PromptService] Nested field handling not fully implemented yet');
+        
+        // Split the field path into parts
+        const parts = field.split('.');
+        
+        // Handle array indexing if present
+        let currentObj = event;
+        
+        for (let i = 0; i < parts.length - 1; i++) {
+          const part = parts[i];
+          
+          // Check if we're dealing with an array index
+          const indexMatch = part.match(/(\w+)\[(\d+)\]/);
+          
+          if (indexMatch) {
+            // Handle array indexing
+            const arrayName = indexMatch[1];
+            const index = parseInt(indexMatch[2], 10);
+            
+            console.log(`[PromptService] Processing array "${arrayName}" at index ${index}`);
+            
+            if (!currentObj[arrayName]) {
+              console.log(`[PromptService] Creating array "${arrayName}"`);
+              currentObj[arrayName] = [];
+            }
+            
+            if (!currentObj[arrayName][index]) {
+              console.log(`[PromptService] Creating object at index ${index}`);
+              currentObj[arrayName][index] = {};
+            }
+            
+            currentObj = currentObj[arrayName][index];
+          } else {
+            // Handle regular object property
+            if (!currentObj[part]) {
+              console.log(`[PromptService] Creating object property "${part}"`);
+              currentObj[part] = {};
+            }
+            
+            currentObj = currentObj[part];
+          }
+        }
+        
+        // Set the final property
+        const finalProp = parts[parts.length - 1];
+        console.log(`[PromptService] Setting final property "${finalProp}" to "${value}"`);
+        currentObj[finalProp] = value;
       } else {
         // Handle top-level fields
         console.log(`[PromptService] Setting top-level field "${field}"`);
         (event as any)[field] = value;
       }
     });
-
+  
     // Update the event with clarification data
     console.log('[PromptService] Updating event with clarification data');
     this.eventService.setEvent(event as Event);
@@ -153,11 +204,11 @@ export class PromptService {
     this.eventService.setRejectedSections(rejectedSections);
     this.eventService.setLoading(false);
     console.log('[PromptService] Loading state set to false');
-
+  
     // Clear the current analysis now that it's been processed
     this.currentAnalysis = null;
     console.log('[PromptService] Cleared current analysis');
-
+  
     console.log('[PromptService] Clarification processing completed successfully');
     return of(true);
   }
