@@ -1,35 +1,57 @@
 {
-    "required": ["name", "title", "description", "startDate", "endDate"],
-    "properties": {
-      "name": {
-        "type": "string",
-        "description": "Event name"
-      },
-      "title": {
-        "type": "string",
-        "description": "Event title"
-      },
-      "description": {
-        "type": "string",
-        "description": "Event description"
-      },
-      "startDate": {
-        "type": "string",
-        "format": "date-time",
-        "description": "Event start date and time"
-      },
-      "endDate": {
-        "type": "string",
-        "format": "date-time",
-        "description": "Event end date and time"
-      },
-      "location": {
-        "type": "string",
-        "description": "Event location"
-      },
-      "organizer": {
-        "type": "string",
-        "description": "Event organizer"
+  "type": "object",
+  "required": ["name", "title", "description", "startDate", "endDate"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Short name for the event"
+    },
+    "title": {
+      "type": "string",
+      "description": "Full title of the event"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the event"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start date and time of the event"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End date and time of the event"
+    },
+    "location": {
+      "type": "string",
+      "description": "Physical or virtual location of the event"
+    },
+    "organizer": {
+      "type": "string",
+      "description": "Name of the event organizer or organization"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "title", "content"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of section (speakers, agenda, etc.)"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the section"
+          },
+          "content": {
+            "type": "object",
+            "description": "Content of the section, varies by type"
+          }
+        }
       }
     }
   }
+}

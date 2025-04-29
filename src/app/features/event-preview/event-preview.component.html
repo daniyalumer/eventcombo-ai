@@ -12,30 +12,30 @@
     </div>
   </div>
   
-  <div *ngIf="hasEvent" class="event-content">
+  <div *ngIf="hasEvent && event" class="event-content">
     <div class="event-header">
-      <h1>{{ mockEvent.title }}</h1>
+      <h1>{{ event.title }}</h1>
       <div class="event-meta">
         <div class="meta-item">
-          <strong>Dates:</strong> {{ mockEvent.startDate | date:'medium' }} - {{ mockEvent.endDate | date:'shortTime' }}
+          <strong>Dates:</strong> {{ event.startDate | date:'medium' }} - {{ event.endDate | date:'shortTime' }}
         </div>
-        <div class="meta-item">
-          <strong>Location:</strong> {{ mockEvent.location }}
+        <div class="meta-item" *ngIf="event.location">
+          <strong>Location:</strong> {{ event.location }}
         </div>
-        <div class="meta-item">
-          <strong>Organizer:</strong> {{ mockEvent.organizer }}
+        <div class="meta-item" *ngIf="event.organizer">
+          <strong>Organizer:</strong> {{ event.organizer }}
         </div>
       </div>
     </div>
     
     <div class="event-section">
       <h3>Description</h3>
-      <p>{{ mockEvent.description }}</p>
+      <p>{{ event.description }}</p>
     </div>
     
     <!-- Dynamic sections -->
     <app-event-section
-      *ngFor="let section of mockEvent.sections"
+      *ngFor="let section of event.sections"
       [type]="section.type"
       [title]="section.title"
       [content]="section.content"

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EventSectionComponent, SpeakersContent, AgendaContent, TextContent } from '../event-section/event-section.component';
+import { Subscription } from 'rxjs';
+import { EventSectionComponent } from '../event-section/event-section.component';
+import { EventService } from '../../core/services/event.service';
+import { Event } from '../../core/models/event.model';
 
 @Component({
   selector: 'app-event-preview',
@@ -9,69 +12,36 @@ import { EventSectionComponent, SpeakersContent, AgendaContent, TextContent } fr
   templateUrl: './event-preview.component.html',
   styleUrl: './event-preview.component.css'
 })
-export class EventPreviewComponent implements OnInit {
-  hasEvent = false;
-  mockEvent = {
-    name: 'Tech Startup Conference',
-    title: 'Annual Tech Startup Conference 2025',
-    description: 'Join us for a full day of insights, networking, and learning with top tech founders.',
-    startDate: '2025-06-15T09:00:00',
-    endDate: '2025-06-15T17:00:00',
-    location: 'Virtual Event',
-    organizer: 'Tech Founders Association',
-    sections: [
-      {
-        type: 'speakers',
-        title: 'Featured Speakers',
-        content: {
-          speakers: [
-            {
-              name: 'Jane Smith',
-              role: 'CEO, TechStart Inc.',
-              bio: 'Jane is a serial entrepreneur with over 15 years of experience in the tech industry.'
-            },
-            {
-              name: 'John Doe',
-              role: 'CTO, Innovation Labs',
-              bio: 'John specializes in AI and has led development teams at major tech companies.'
-            }
-          ]
-        } as SpeakersContent
-      },
-      {
-        type: 'agenda',
-        title: 'Event Schedule',
-        content: {
-          items: [
-            {
-              time: '9:00 AM',
-              title: 'Registration',
-              description: 'Welcome and check-in'
-            },
-            {
-              time: '10:00 AM',
-              title: 'Keynote',
-              description: 'Future of Tech Startups',
-              speaker: 'Jane Smith'
-            }
-          ]
-        } as AgendaContent
-      },
-      {
-        type: 'registration',
-        title: 'Register Now',
-        content: {
-          text: 'Secure your spot at this exclusive event. Limited seats available!'
-        } as TextContent
-      }
-    ]
-  };
+export class EventPreviewComponent implements OnInit, OnDestroy {
+  event: Event | null = null;
   rejectedSections: string[] = [];
+  hasEvent = false;
+  isLoading = false;
+  
+  private eventSubscription: Subscription | null = null;
+  private rejectedSectionsSubscription: Subscription | null = null;
+  private loadingSubscription: Subscription | null = null;
+
+  constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
-    // For demo purposes, show the mock event after a short delay
-    setTimeout(() => {
-      this.hasEvent = true;
-    }, 1000);
+    this.eventSubscription = this.eventService.getEvent().subscribe(event => {
+      this.event = event;
+      this.hasEvent = !!event;
+    });
+    
+    this.rejectedSectionsSubscription = this.eventService.getRejectedSections().subscribe(sections => {
+      this.rejectedSections = sections;
+    });
+
+    this.loadingSubscription = this.eventService.getLoading().subscribe(isLoading => {
+      this.isLoading = isLoading;
+    });
+  }
+  
+  ngOnDestroy(): void {
+    this.eventSubscription?.unsubscribe();
+    this.rejectedSectionsSubscription?.unsubscribe();
+    this.loadingSubscription?.unsubscribe();
   }
 }
