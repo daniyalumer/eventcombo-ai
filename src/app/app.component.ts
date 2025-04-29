@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // Initialize constraint service
     this.constraintService.initialize().subscribe(success => {
+      console.log('Application initialized');
       if (!success) {
         console.error('Failed to initialize constraints');
       }

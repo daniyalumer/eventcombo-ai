@@ -1,13 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-export interface ClarificationQuestion {
-  field: string;
-  question: string;
-}
-
-export type ClarificationAnswers = Record<string, string>;
+import { ClarificationQuestion, ClarificationAnswers } from '../../core/models/event.model';
 
 @Component({
   selector: 'app-clarification-dialog',
@@ -23,16 +17,28 @@ export class ClarificationDialogComponent implements OnInit {
   @Output() cancelRequest = new EventEmitter<void>();
   
   answers: Record<string, string> = {};
+  formValid = false;
   
   ngOnInit(): void {
     // Initialize answers object
     this.questions.forEach(q => {
       this.answers[q.field] = '';
     });
+    this.validateForm();
+  }
+  
+  validateForm(): void {
+    this.formValid = Object.values(this.answers).every(value => value.trim() !== '');
+  }
+  
+  onInputChange(): void {
+    this.validateForm();
   }
   
   onSubmit(): void {
-    this.submitAnswers.emit(this.answers);
+    if (this.formValid) {
+      this.submitAnswers.emit(this.answers);
+    }
   }
   
   onCancel(): void {

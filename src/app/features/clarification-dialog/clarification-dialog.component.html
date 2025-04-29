@@ -12,14 +12,16 @@
           type="text" 
           [id]="q.field" 
           [(ngModel)]="answers[q.field]" 
+          (input)="onInputChange()"
           placeholder="Your answer"
+          required
         >
       </div>
     </div>
     
     <div class="dialog-footer">
       <button class="cancel-button" (click)="onCancel()">Cancel</button>
-      <button class="submit-button" (click)="onSubmit()">Submit</button>
+      <button class="submit-button" [disabled]="!formValid" (click)="onSubmit()">Submit</button>
     </div>
   </div>
 </div>
