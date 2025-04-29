@@ -4,8 +4,10 @@ import { CommonModule } from '@angular/common';
 import { PromptInputComponent } from './features/prompt-input/prompt-input.component';
 import { EventPreviewComponent } from './features/event-preview/event-preview.component';
 import { ClarificationDialogComponent } from './features/clarification-dialog/clarification-dialog.component';
+import { ModelSelectorComponent } from './features/model-selector/model-selector.component';
 import { ConstraintService } from './core/services/constraint.service';
 import { PromptService } from './core/services/prompt.service';
+import { LlmService, ModelType } from './core/services/llm.service';
 import { ClarificationQuestion, ClarificationAnswers } from './core/models/event.model';
 
 @Component({
@@ -16,7 +18,8 @@ import { ClarificationQuestion, ClarificationAnswers } from './core/models/event
     RouterOutlet,
     PromptInputComponent,
     EventPreviewComponent,
-    ClarificationDialogComponent
+    ClarificationDialogComponent,
+    ModelSelectorComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -25,11 +28,16 @@ export class AppComponent implements OnInit {
   title = 'EventCombo AI Event Creator';
   showClarificationDialog = false;
   clarificationQuestions: ClarificationQuestion[] = [];
+  currentModel: ModelType = 'groq';
   
   constructor(
     private constraintService: ConstraintService,
-    private promptService: PromptService
-  ) {}
+    private promptService: PromptService,
+    private llmService: LlmService
+  ) {
+    // Initialize default model
+    this.currentModel = this.llmService.getCurrentModel();
+  }
   
   ngOnInit(): void {
     // Initialize constraint service
@@ -38,6 +46,12 @@ export class AppComponent implements OnInit {
       if (!success) {
         console.error('Failed to initialize constraints');
       }
+    });
+    
+    // Subscribe to model changes
+    this.llmService.currentModel$.subscribe(model => {
+      console.log(`[AppComponent] LLM model changed to: ${model}`);
+      this.currentModel = model;
     });
   }
   

@@ -1,0 +1,34 @@
+<div class="model-selector-container">
+    <div class="model-selector-title">AI Model</div>
+    
+    <div class="model-buttons">
+      <button 
+        [class.active]="currentModel === 'groq'"
+        [disabled]="!hasApiKey('groq')"
+        (click)="switchModel('groq')"
+        class="model-button">
+        <div class="model-icon groq-icon"></div>
+        <div class="model-info">
+          <div class="model-name">Groq</div>
+          <div class="model-details">Llama 3.3 70B</div>
+        </div>
+      </button>
+      
+      <button 
+        [class.active]="currentModel === 'gemini'"
+        [disabled]="!hasApiKey('gemini')"
+        (click)="switchModel('gemini')"
+        class="model-button">
+        <div class="model-icon gemini-icon"></div>
+        <div class="model-info">
+          <div class="model-name">Google Gemini</div>
+          <div class="model-details">2.0 Flash</div>
+        </div>
+      </button>
+    </div>
+    
+    <div class="model-info-text">
+      <span *ngIf="currentModel === 'groq'">Using Groq's fast Llama 3.3 70B model</span>
+      <span *ngIf="currentModel === 'gemini'">Using Google's Gemini 2.0 Flash model</span>
+    </div>
+  </div>

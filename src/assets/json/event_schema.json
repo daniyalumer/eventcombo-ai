@@ -17,12 +17,12 @@
     "startDate": {
       "type": "string",
       "format": "date-time",
-      "description": "Start date and time of the event"
+      "description": "Start date and time of the event in ISO format (e.g., 2025-07-15T09:00:00Z)"
     },
     "endDate": {
       "type": "string",
       "format": "date-time",
-      "description": "End date and time of the event"
+      "description": "End date and time of the event in ISO format (e.g., 2025-07-15T17:00:00Z)"
     },
     "location": {
       "type": "string",
@@ -40,6 +40,7 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": ["description", "agenda", "speakers", "registration", "location", "faq", "contact", "sponsors"],
             "description": "Type of section (speakers, agenda, etc.)"
           },
           "title": {

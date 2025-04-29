@@ -1,16 +1,12 @@
 {
-    "sections": [
-      "header",
-      "description",
-      "agenda",
-      "speakers",
-      "registration",
-      "sponsors",
-      "location",
-      "faq",
-      "contact",
-      "gallery",
-      "testimonials",
-      "pricing"
-    ]
-  }
+  "sections": [
+    "description",
+    "agenda",
+    "speakers",
+    "registration",
+    "location",
+    "faq",
+    "contact",
+    "sponsors"
+  ]
+}

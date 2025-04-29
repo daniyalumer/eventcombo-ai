@@ -17,7 +17,11 @@
       <h1>{{ event.title }}</h1>
       <div class="event-meta">
         <div class="meta-item">
-          <strong>Dates:</strong> {{ event.startDate | date:'medium' }} - {{ event.endDate | date:'shortTime' }}
+          <strong>Dates:</strong> 
+          <ng-container *ngIf="isValidDate(event.startDate); else invalidDate">
+            {{ event.startDate | date:'medium' }} - {{ event.endDate | date:'shortTime' }}
+          </ng-container>
+          <ng-template #invalidDate>{{ event.startDate }} - {{ event.endDate }}</ng-template>
         </div>
         <div class="meta-item" *ngIf="event.location">
           <strong>Location:</strong> {{ event.location }}

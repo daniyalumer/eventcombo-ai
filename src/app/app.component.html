@@ -1,7 +1,12 @@
 <div class="app-container">
-  <header>
-    <h1>{{ title }}</h1>
-    <p>Create events using natural language prompts</p>
+  <header class="app-header">
+    <div class="header-left">
+      <h1>{{ title }}</h1>
+      <p>Create events using natural language prompts</p>
+    </div>
+    <div class="header-right">
+      <app-model-selector></app-model-selector>
+    </div>
   </header>
   
   <main>

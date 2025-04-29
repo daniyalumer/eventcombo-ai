@@ -29,6 +29,14 @@ export class EventService {
   setEvent(event: Event): void {
     console.log('[EventService] Setting event:', event.name);
     
+    // Format date strings
+    if (event.startDate) {
+      event.startDate = this.parseAndFormatDate(event.startDate);
+    }
+    if (event.endDate) {
+      event.endDate = this.parseAndFormatDate(event.endDate);
+    }
+    
     // Process sections to ensure content is properly typed
     if (event && event.sections) {
       console.log(`[EventService] Processing ${event.sections.length} sections for content transformation`);
@@ -76,6 +84,16 @@ export class EventService {
     } catch (error) {
       console.error(`[EventService] Error transforming content for section type ${sectionType}:`, error);
       return { text: 'Error processing content' };
+    }
+  }
+
+  private parseAndFormatDate(dateString: string): string {
+    try {
+      // Handle various date formats including "1st may 2025"
+      return new Date(dateString.replace(/(\d+)(st|nd|rd|th)/, '$1')).toISOString();
+    } catch (e) {
+      console.warn(`[EventService] Failed to parse date: ${dateString}`, e);
+      return new Date().toISOString(); // Fallback to current date
     }
   }
   

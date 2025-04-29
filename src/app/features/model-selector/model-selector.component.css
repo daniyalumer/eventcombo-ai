@@ -1,0 +1,103 @@
+.model-selector-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 10;
+}
+  
+.model-selector-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #333;
+    font-size: 1rem;
+}
+  
+.model-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+  
+.model-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    min-width: 180px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 20;
+}
+  
+.model-button:hover:not(.active):not(:disabled) {
+    border-color: #ccc;
+    background-color: #f5f5f5;
+}
+  
+.model-button.active {
+    background-color: #eef5ff;
+    border-color: #4c84ff;
+    box-shadow: 0 0 0 1px rgba(76, 132, 255, 0.5);
+}
+  
+  .model-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+  
+.model-icon {
+width: 24px;
+height: 24px;
+margin-right: 12px;
+background-size: contain;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.groq-icon {
+background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234361EE"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4-8a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"/></svg>');
+}
+
+.gemini-icon {
+background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234285F4"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5m-10-5v10" stroke="%234285F4" stroke-width="2" fill="none"/></svg>');
+}
+
+.model-info {
+text-align: left;
+}
+
+.model-name {
+font-weight: 500;
+margin-bottom: 2px;
+font-size: 0.9rem;
+}
+
+.model-details {
+color: #666;
+font-size: 0.8rem;
+}
+
+.model-info-text {
+margin-top: 12px;
+font-size: 0.8rem;
+color: #666;
+text-align: center;
+}
+
+@media (max-width: 576px) {
+.model-buttons {
+    flex-direction: column;
+}
+
+.model-button {
+    width: 100%;
+}
+}

@@ -1,156 +1,156 @@
 .event-section {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  }
-  
-  .event-section h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 18px;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-  }
-  
-  /* Speakers section */
-  .speakers-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  .speaker-card {
-    display: flex;
-    gap: 15px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 6px;
-  }
-  
-  .speaker-avatar {
-    flex-shrink: 0;
-  }
-  
-  .avatar-placeholder {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #4c84ff;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .speaker-info h4 {
-    margin: 0 0 5px 0;
-    font-size: 16px;
-  }
-  
-  .speaker-role {
-    margin: 0 0 10px 0;
-    color: #666;
-    font-style: italic;
-  }
-  
-  .speaker-bio {
-    margin: 0;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  /* Agenda section */
-  .agenda-content {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .agenda-item {
-    display: flex;
-    gap: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 6px;
-  }
-  
-  .agenda-time {
-    font-weight: bold;
-    white-space: nowrap;
-    color: #4c84ff;
-    min-width: 100px;
-  }
-  
-  .agenda-details {
-    flex-grow: 1;
-  }
-  
-  .agenda-details h4 {
-    margin: 0 0 10px 0;
-    font-size: 16px;
-  }
-  
-  .agenda-details p {
-    margin: 0 0 10px 0;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .agenda-speaker {
-    font-style: italic;
-    font-size: 13px !important;
-    color: #666 !important;
-  }
-  
-  /* Registration section */
-  .registration-content p {
-    margin-bottom: 20px;
-  }
-  
-  .registration-form {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 6px;
-  }
-  
-  .register-button {
-    background-color: #4c84ff;
-    margin-top: 10px;
-    width: 100%;
-    padding: 12px;
-  }
-  
-  /* Generic content */
-  .generic-content {
-    line-height: 1.6;
-  }
-  
-  /* Section type specific styling */
-  .event-section.speakers {
-    border-left: 4px solid #4c84ff;
-  }
-  
-  .event-section.agenda {
-    border-left: 4px solid #ff6b6b;
-  }
-  
-  .event-section.registration {
-    border-left: 4px solid #56c271;
-  }
-  
-  .event-section.description {
-    border-left: 4px solid #f7c744;
-  }
-  
-  .event-section.location {
-    border-left: 4px solid #9c72ff;
-  }
-  
-  .event-section.faq {
-    border-left: 4px solid #ff9a3c;
-  }
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.event-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Speakers section */
+.speakers-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.speaker-card {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+}
+
+.speaker-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #4c84ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.speaker-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+}
+
+.speaker-role {
+  margin: 0 0 10px 0;
+  color: #666;
+  font-style: italic;
+}
+
+.speaker-bio {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Agenda section */
+.agenda-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.agenda-item {
+  display: flex;
+  gap: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+}
+
+.agenda-time {
+  font-weight: bold;
+  white-space: nowrap;
+  color: #4c84ff;
+  min-width: 100px;
+}
+
+.agenda-details {
+  flex-grow: 1;
+}
+
+.agenda-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.agenda-details p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.agenda-speaker {
+  font-style: italic;
+  font-size: 13px !important;
+  color: #666 !important;
+}
+
+/* Registration section */
+.registration-content p {
+  margin-bottom: 20px;
+}
+
+.registration-form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.register-button {
+  background-color: #4c84ff;
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+}
+
+/* Generic content */
+.generic-content {
+  line-height: 1.6;
+}
+
+/* Section type specific styling */
+.event-section.speakers {
+  border-left: 4px solid #4c84ff;
+}
+
+.event-section.agenda {
+  border-left: 4px solid #ff6b6b;
+}
+
+.event-section.registration {
+  border-left: 4px solid #56c271;
+}
+
+.event-section.description {
+  border-left: 4px solid #f7c744;
+}
+
+.event-section.location {
+  border-left: 4px solid #9c72ff;
+}
+
+.event-section.faq {
+  border-left: 4px solid #ff9a3c;
+}
