@@ -31,6 +31,7 @@
   [questions]="clarificationQuestions"
   (submitAnswers)="onClarificationSubmit($event)"
   (cancelRequest)="onClarificationCancel()"
+  (completed)="onClarificationCompleted()"
 ></app-clarification-dialog>
 
 <router-outlet></router-outlet>

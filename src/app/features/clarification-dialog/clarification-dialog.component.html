@@ -2,10 +2,20 @@
   <div class="dialog-container">
     <div class="dialog-header">
       <h2>We Need More Information</h2>
-      <p>Please provide the following details to create your event:</p>
+      <p *ngIf="currentStep === 'base'">Please provide the following details for your event:</p>
+      <p *ngIf="currentStep === 'sections'">Please provide additional details for event sections:</p>
+      <div class="step-indicator">
+        <div class="step" [class.active]="currentStep === 'base'">1</div>
+        <div class="step-line"></div>
+        <div class="step" [class.active]="currentStep === 'sections'">2</div>
+      </div>
     </div>
     
     <div class="dialog-content">
+      <div *ngIf="questions.length === 0" class="no-questions">
+        <p>No questions to display. Please try again.</p>
+      </div>
+      
       <div *ngFor="let q of questions" class="form-group">
         <label [for]="q.field">{{ q.question }}</label>
         <input 
@@ -20,8 +30,11 @@
     </div>
     
     <div class="dialog-footer">
-      <button class="cancel-button" (click)="onCancel()">Cancel</button>
-      <button class="submit-button" [disabled]="!formValid" (click)="onSubmit()">Submit</button>
+      <button class="cancel-button" (click)="onCancel()" [disabled]="isSubmitting">Cancel</button>
+      <button class="submit-button" [disabled]="!formValid || isSubmitting" (click)="onSubmit()">
+        <span *ngIf="isSubmitting">Processing...</span>
+        <span *ngIf="!isSubmitting">Submit</span>
+      </button>
     </div>
   </div>
 </div>

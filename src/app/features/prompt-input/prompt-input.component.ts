@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PromptService } from '../../core/services/prompt.service';
 import { EventService } from '../../core/services/event.service';
 import { ClarificationQuestion } from '../../core/models/event.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-prompt-input',
@@ -12,7 +13,7 @@ import { ClarificationQuestion } from '../../core/models/event.model';
   templateUrl: './prompt-input.component.html',
   styleUrl: './prompt-input.component.css'
 })
-export class PromptInputComponent implements OnInit {
+export class PromptInputComponent implements OnInit, OnDestroy {
   @Output() clarificationNeeded = new EventEmitter<ClarificationQuestion[]>();
   
   userPrompt = '';
@@ -24,6 +25,8 @@ export class PromptInputComponent implements OnInit {
     'Create an event about AI, include agenda, registration, and speakers.',
     'Build an educational workshop with agenda, registration, and FAQ sections.'
   ];
+  
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private promptService: PromptService,
@@ -31,13 +34,31 @@ export class PromptInputComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventService.getLoading().subscribe(isLoading => {
-      this.isProcessing = isLoading;
-    });
+    this.subscriptions.push(
+      this.eventService.getLoading().subscribe(isLoading => {
+        this.isProcessing = isLoading;
+      })
+    );
 
-    this.eventService.getError().subscribe(error => {
-      this.errorMessage = error || '';
-    });
+    this.subscriptions.push(
+      this.eventService.getError().subscribe(error => {
+        this.errorMessage = error || '';
+      })
+    );
+    
+    // Subscribe to the missing info subject
+    this.subscriptions.push(
+      this.promptService.currentMissingInfo$.subscribe((missingInfo: ClarificationQuestion[] | null) => {
+        if (missingInfo && missingInfo.length > 0) {
+          this.clarificationNeeded.emit(missingInfo);
+        }
+      })
+    );
+  }
+  
+  ngOnDestroy(): void {
+    // Clean up subscriptions
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   useExample(example: string): void {

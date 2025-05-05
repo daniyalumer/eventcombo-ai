@@ -68,6 +68,18 @@ export class ConstraintService {
     return [...this.allowedSections];
   }
 
+  // New method to get banned words
+  getBannedWords(): string[] {
+    console.log('[ConstraintService] Getting banned words');
+    return [...this.bannedWords];
+  }
+
+  // New method to get banned keywords
+  getBannedKeywords(): string[] {
+    console.log('[ConstraintService] Getting banned keywords');
+    return [...this.bannedKeywords];
+  }
+
   hasBannedContent(text: string): { hasBanned: boolean, bannedTerms: string[] } {
     console.log('[ConstraintService] Checking for banned content in text');
     
